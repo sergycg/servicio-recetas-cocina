@@ -5,13 +5,17 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="paso")
@@ -31,6 +35,22 @@ public class Paso implements Serializable{
 
 	@Column(name="descripcion_paso")
 	private String descripcionPaso;
+	
+//	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "pasos", "ingredientes", 
+//		"titulo", "descripcion", "observaciones", "createAt" })
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+	private Receta receta;
+
+	public Receta getReceta() {
+		return receta;
+	}
+
+
+	public void setReceta(Receta receta) {
+		this.receta = receta;
+	}
+
 
 	@Column(name="create_at")
 	@Temporal(TemporalType.DATE)

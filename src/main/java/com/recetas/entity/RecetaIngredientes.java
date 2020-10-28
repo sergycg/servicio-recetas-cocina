@@ -33,6 +33,23 @@ public class RecetaIngredientes implements Serializable {
 	@JoinColumn(name = "ingrediente_id")
 	private Ingrediente ingrediente;
 
+//	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "pasos", "ingredientes", 
+//		"titulo", "descripcion", "observaciones", "createAt" })
+	@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name="receta_id")
+	private Receta receta;
+
+	
+	
+	public Receta getReceta() {
+		return receta;
+	}
+
+	public void setReceta(Receta receta) {
+		this.receta = receta;
+	}
+
 	public Long getId() {
 		return id;
 	}
