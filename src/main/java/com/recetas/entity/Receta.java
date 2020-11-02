@@ -33,7 +33,7 @@ public class Receta implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	private String titulo;
+	private String nombre;
 	
 	private String descripcion;
 	
@@ -77,13 +77,15 @@ public class Receta implements Serializable{
 		this.id = id;
 	}
 
-	public String getTitulo() {
-		return titulo;
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setTitulo(String titulo) {
-		this.titulo = titulo;
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
+
 
 	public String getDescripcion() {
 		return descripcion;

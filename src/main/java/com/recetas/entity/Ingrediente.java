@@ -27,7 +27,7 @@ public class Ingrediente implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
-	private String ingrediente;
+	private String nombre;
 
 	@Column(name="create_at")
 	@Temporal(TemporalType.DATE)
@@ -57,13 +57,16 @@ public class Ingrediente implements Serializable{
 		this.id = id;
 	}
 
-	public String getIngrediente() {
-		return ingrediente;
+
+	public String getNombre() {
+		return nombre;
 	}
 
-	public void setIngrediente(String ingrediente) {
-		this.ingrediente = ingrediente;
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
+
 
 	
 }
