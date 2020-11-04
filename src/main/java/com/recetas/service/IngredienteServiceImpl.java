@@ -8,56 +8,26 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.recetas.dao.IIngredienteDao;
+import com.recetas.common.service.CommonServiceImpl;
+import com.recetas.dao.IngredienteDao;
 import com.recetas.entity.Ingrediente;
 
 @Service
-public class IngredienteServiceImpl implements IIngredienteService {
+public class IngredienteServiceImpl extends CommonServiceImpl<Ingrediente, IngredienteDao> implements IngredienteService {
 
 	@Autowired
-	private IIngredienteDao daoIngrediente;
-	
-	@Override
-	@Transactional(readOnly = true)
-	public List<Ingrediente> findIngredientes() {
-		return (List<Ingrediente>) daoIngrediente.findAllByOrderByNombreAsc();
-	}
-
-	@Override
-	@Transactional
-	public void saveIngrediente (Ingrediente ingrediente) {
-		daoIngrediente.save(ingrediente);	
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Ingrediente findIngredienteById(Long id) {
-		return daoIngrediente.findById(id).orElse(null);
-	}
-	
-	@Override
-	@Transactional
-	public void deleteIngrediente(Long id) {
-		daoIngrediente.deleteById(id);
-	}
-	
-	
-	@Override
-	@Transactional(readOnly = true)
-	public Page<Ingrediente> findIngredientes(Pageable pageable) {
-		return daoIngrediente.findAllByOrderByNombreAsc(pageable);
-	}
+	private IngredienteDao ingredienteDao;
 	
 	@Override
 	@Transactional(readOnly = true)
 	public List<Ingrediente> findByNombre(String term) {
-		return daoIngrediente.findByNombre(term);
+		return ingredienteDao.findByNombre(term);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
 	public Page<Ingrediente> findByNombre(String term, Pageable pageable) {
-		return daoIngrediente.findByNombre(term, pageable);
+		return ingredienteDao.findByNombre(term, pageable);
 	}
 
 }

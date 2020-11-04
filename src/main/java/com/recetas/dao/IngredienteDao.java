@@ -11,10 +11,8 @@ import org.springframework.data.repository.query.Param;
 import com.recetas.entity.Ingrediente;
 
 
-public interface IIngredienteDao extends JpaRepository<Ingrediente, Long> {
+public interface IngredienteDao extends JpaRepository<Ingrediente, Long> {
 
-//	public List<Ingrediente> findByRecetaId(Long id);
-	
 	@Query("select e from Ingrediente e where e.nombre like %?1% order by e.nombre asc")
 	public List<Ingrediente> findByNombre(String term);
 

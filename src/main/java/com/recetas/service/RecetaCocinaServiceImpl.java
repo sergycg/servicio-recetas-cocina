@@ -8,32 +8,21 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.recetas.dao.IRecetaCocinaDao;
+import com.recetas.common.service.CommonServiceImpl;
+import com.recetas.dao.RecetaCocinaDao;
 import com.recetas.entity.Paso;
 import com.recetas.entity.Receta;
 import com.recetas.entity.RecetaIngredientes;
 
 @Service
-public class RecetaCocinaServiceImpl implements IRecetaCocinaService {
+public class RecetaCocinaServiceImpl extends CommonServiceImpl<Receta, RecetaCocinaDao> implements RecetaCocinaService {
 
 	@Autowired
-	private IRecetaCocinaDao daoRecetaCocina;
+	private RecetaCocinaDao recetaCocinaDao;
 	
 	@Override
-	@Transactional(readOnly = true)
-	public List<Receta> findRecetas() {
-		return (List<Receta>) daoRecetaCocina.findAll();
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Page<Receta> findRecetas(Pageable pageable) {
-		return daoRecetaCocina.findAll(pageable);
-	}
-
-	@Override
 	@Transactional
-	public void saveReceta (Receta receta) {
+	public void save (Receta receta) {
 		if (receta.getIngredientes()!=null) {
 			for (RecetaIngredientes ingrediente : receta.getIngredientes()) {
 				ingrediente.setReceta(receta);
@@ -44,19 +33,20 @@ public class RecetaCocinaServiceImpl implements IRecetaCocinaService {
 				paso.setReceta(receta);
 			}
 		}
-		daoRecetaCocina.save(receta);	
+		recetaCocinaDao.save(receta);	
 	}
 
 	@Override
-	@Transactional
-	public void deleteReceta(Long id) {
-		daoRecetaCocina.deleteById(id);
+	@Transactional(readOnly = true)
+	public List<Receta> findByNombre(String term) {
+		return recetaCocinaDao.findByNombre(term);
 	}
-	
+
 	@Override
 	@Transactional(readOnly = true)
-	public Receta findRecetaById(Long id) {
-		return daoRecetaCocina.findById(id).orElse(null);
+	public Page<Receta> findByNombre(String term, Pageable pageable) {
+		return recetaCocinaDao.findByNombre(term, pageable);
 	}
+
 
 }
