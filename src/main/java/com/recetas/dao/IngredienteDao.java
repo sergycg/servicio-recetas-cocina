@@ -14,10 +14,12 @@ import com.recetas.entity.Ingrediente;
 public interface IngredienteDao extends JpaRepository<Ingrediente, Long> {
 
 	@Query("select e from Ingrediente e where e.nombre like %?1% order by e.nombre asc")
-	public List<Ingrediente> findByNombre(String term);
+	public List<Ingrediente> findLikeNombre(String term);
 
 	@Query("select e from Ingrediente e where e.nombre like %:nombre% order by e.nombre asc")
-	Page<Ingrediente> findByNombre(@Param("nombre") String nombre, Pageable pageable);
+	Page<Ingrediente> findLikeNombre(@Param("nombre") String nombre, Pageable pageable);
+	
+	public List<Ingrediente> findByNombre(String nombre);
 	
 	public List<Ingrediente> findAllByOrderByNombreAsc(); 
 	

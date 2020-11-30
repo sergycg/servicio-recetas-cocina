@@ -10,8 +10,10 @@ import com.recetas.entity.Receta;
 
 public interface RecetaCocinaService extends CommonService<Receta>{
 	
-	public Page<Receta> findByNombre(String term, Pageable pageable);
+	public Page<Receta> findLikeNombre(String term, Pageable pageable);
 	
-	public List<Receta> findByNombre(String term);
+	public List<Receta> findLikeNombre(String term);
+	
+	public List<Receta> findByNombre(String nombre);
 
 }

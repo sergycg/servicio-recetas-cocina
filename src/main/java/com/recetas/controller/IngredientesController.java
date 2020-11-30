@@ -37,12 +37,12 @@ public class IngredientesController extends CommonController<Ingrediente, Ingred
 
 	@GetMapping("/filtrar/{term}")
 	public ResponseEntity<?> filtrarIngredientes(@PathVariable String term){
-		return ResponseEntity.ok(ingredienteService.findByNombre(term));
+		return ResponseEntity.ok(ingredienteService.findLikeNombre(term));
 	}
 	
 	@GetMapping("/pagina/filtrar/{term}")
 	public ResponseEntity<?> filtrarPaginable(Pageable pageable, @PathVariable String term){
-		Page<Ingrediente> ingredientes = ingredienteService.findByNombre(term, pageable);
+		Page<Ingrediente> ingredientes = ingredienteService.findLikeNombre(term, pageable);
 		if (ingredientes != null) {
 			return new ResponseEntity<>(ingredientes, HttpStatus.OK);
 		} else {
@@ -50,4 +50,13 @@ public class IngredientesController extends CommonController<Ingrediente, Ingred
 		}
 	}
 
+	@GetMapping("/nombre/{nombre}")
+	public ResponseEntity<?> getBynombre(@PathVariable String nombre) {
+		List<Ingrediente> ingredientes = ingredienteService.findByNombre(nombre);
+		if (ingredientes != null) {
+			return new ResponseEntity<>(ingredientes, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 }

@@ -54,11 +54,11 @@ public class CommonServiceImpl <E, R extends JpaRepository<E, Long>> implements 
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy).descending());
         return repository.findAll(paging);
     }
-
+	
 	@Override
 	@Transactional
-	public void save (E ingrediente) {
-		repository.save(ingrediente);	
+	public E save (E ingrediente) {
+		return repository.save(ingrediente);	
 	}
 
 	@Override

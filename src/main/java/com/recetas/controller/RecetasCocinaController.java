@@ -37,12 +37,12 @@ public class RecetasCocinaController extends CommonController<Receta, RecetaCoci
 
 	@GetMapping("/filtrar/{term}")
 	public ResponseEntity<?> filtrarRecetas(@PathVariable String term){
-		return ResponseEntity.ok(recetaCocinaService.findByNombre(term));
+		return ResponseEntity.ok(recetaCocinaService.findLikeNombre(term));
 	}
 	
 	@GetMapping("/pagina/filtrar/{term}")
 	public ResponseEntity<?> filtrarPaginable(Pageable pageable, @PathVariable String term){
-		Page<Receta> recetas = recetaCocinaService.findByNombre(term, pageable);
+		Page<Receta> recetas = recetaCocinaService.findLikeNombre(term, pageable);
 		if (recetas != null) {
 			return new ResponseEntity<>(recetas, HttpStatus.OK);
 		} else {
@@ -50,7 +50,15 @@ public class RecetasCocinaController extends CommonController<Receta, RecetaCoci
 		}
 	}
 
-
+	@GetMapping("/nombre/{nombre}")
+	public ResponseEntity<?> getBynombre(@PathVariable String nombre) {
+		List<Receta> recetas = recetaCocinaService.findByNombre(nombre);
+		if (recetas != null) {
+			return new ResponseEntity<>(recetas, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 	
 	
 	

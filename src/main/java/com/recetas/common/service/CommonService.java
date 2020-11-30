@@ -18,10 +18,10 @@ public interface CommonService<E> {
 	public List<E> findAllSortByAsc(String sortBy);
 	
 	public List<E> findAllSortByDesc(String sortBy);
-	
+
 	public E findById(Long id);
 	
-	public void save (E ingrediente);
+	public E save (E ingrediente);
 	
 	public void delete(Long id);
 

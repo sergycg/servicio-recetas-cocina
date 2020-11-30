@@ -38,11 +38,11 @@ public class CommonController <E, S extends CommonService<E>> {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-
+	
 	@PostMapping()
 	public ResponseEntity<?> save(@RequestBody E e) {
-		this.service.save(e);
-		return new ResponseEntity<>(HttpStatus.CREATED);
+		E newE = this.service.save(e);
+		return new ResponseEntity<>(newE, HttpStatus.CREATED);
 	}
 	
 	@DeleteMapping("/{id}")

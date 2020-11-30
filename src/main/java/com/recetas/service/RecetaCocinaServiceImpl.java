@@ -22,7 +22,7 @@ public class RecetaCocinaServiceImpl extends CommonServiceImpl<Receta, RecetaCoc
 	
 	@Override
 	@Transactional
-	public void save (Receta receta) {
+	public Receta save (Receta receta) {
 		if (receta.getIngredientes()!=null) {
 			for (RecetaIngredientes ingrediente : receta.getIngredientes()) {
 				ingrediente.setReceta(receta);
@@ -33,20 +33,26 @@ public class RecetaCocinaServiceImpl extends CommonServiceImpl<Receta, RecetaCoc
 				paso.setReceta(receta);
 			}
 		}
-		recetaCocinaDao.save(receta);	
+		return recetaCocinaDao.save(receta);	
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Receta> findByNombre(String term) {
-		return recetaCocinaDao.findByNombre(term);
+	public List<Receta> findLikeNombre(String term) {
+		return recetaCocinaDao.findLikeNombre(term);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<Receta> findByNombre(String term, Pageable pageable) {
-		return recetaCocinaDao.findByNombre(term, pageable);
+	public Page<Receta> findLikeNombre(String term, Pageable pageable) {
+		return recetaCocinaDao.findLikeNombre(term, pageable);
 	}
 
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Receta> findByNombre(String nombre) {
+		return repository.findByNombre(nombre);
+    }
+	
 }

@@ -20,14 +20,19 @@ public class IngredienteServiceImpl extends CommonServiceImpl<Ingrediente, Ingre
 	
 	@Override
 	@Transactional(readOnly = true)
-	public List<Ingrediente> findByNombre(String term) {
-		return ingredienteDao.findByNombre(term);
+	public List<Ingrediente> findLikeNombre(String term) {
+		return ingredienteDao.findLikeNombre(term);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Page<Ingrediente> findByNombre(String term, Pageable pageable) {
-		return ingredienteDao.findByNombre(term, pageable);
+	public Page<Ingrediente> findLikeNombre(String term, Pageable pageable) {
+		return ingredienteDao.findLikeNombre(term, pageable);
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public List<Ingrediente> findByNombre(String nombre) {
+		return repository.findByNombre(nombre);
+    }
 }
