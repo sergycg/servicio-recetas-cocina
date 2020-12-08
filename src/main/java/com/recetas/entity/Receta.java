@@ -38,6 +38,9 @@ public class Receta implements Serializable{
 	private String descripcion;
 	
 	private String observaciones;
+	
+	@Column(name="foto_portada")
+	private String fotoPortada;
 
 	@Column(name="create_at")
 	@Temporal(TemporalType.DATE)
@@ -123,6 +126,16 @@ public class Receta implements Serializable{
 
 	public void setPasos(List<Paso> pasos) {
 		this.pasos = pasos;
+	}
+
+
+	public String getFotoPortada() {
+		return fotoPortada;
+	}
+
+
+	public void setFotoPortada(String fotoPortada) {
+		this.fotoPortada = fotoPortada;
 	}
 	
 	
