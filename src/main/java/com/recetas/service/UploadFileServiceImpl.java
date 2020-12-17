@@ -18,8 +18,10 @@ import org.springframework.web.multipart.MultipartFile;
 public class UploadFileServiceImpl implements UploadFileService {
 	
 
+	@Value("${configuracion.directorio.imagenes.upload}")
+	private String directorioUpload;
 	
-	private final static String DIRECTORIO_UPLOAD = "C:\\pruebaUploads";
+//	private final static String DIRECTORIO_UPLOAD = "C:\\pruebaUploads";
 	private final static String DIRECTORIO_STATIC_IMAGES = "src\\main\\resources\\static\\images";
 	private final static String DEFAULT_IMAGE = "camara-de-fotos.png";
 
@@ -49,7 +51,7 @@ public class UploadFileServiceImpl implements UploadFileService {
 	public boolean eliminar(String nombreFoto) {
 		
 		if(nombreFoto !=null && nombreFoto.length() >0) {
-			Path rutaFotoAnterior = Paths.get(DIRECTORIO_UPLOAD).resolve(nombreFoto).toAbsolutePath();
+			Path rutaFotoAnterior = Paths.get(directorioUpload).resolve(nombreFoto).toAbsolutePath();
 			File archivoFotoAnterior = rutaFotoAnterior.toFile();
 			if(archivoFotoAnterior.exists() && archivoFotoAnterior.canRead()) {
 				archivoFotoAnterior.delete();
@@ -61,6 +63,6 @@ public class UploadFileServiceImpl implements UploadFileService {
 
 	@Override
 	public Path getPath(String nombreFoto) {
-		return Paths.get(DIRECTORIO_UPLOAD).resolve(nombreFoto).toAbsolutePath();
+		return Paths.get(directorioUpload).resolve(nombreFoto).toAbsolutePath();
 	}
 }
