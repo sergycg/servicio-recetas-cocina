@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
@@ -33,7 +34,10 @@ import com.recetas.service.UploadFileService;
 @RestController
 @RequestMapping("/recetas")
 public class RecetasCocinaController extends CommonController<Receta, RecetaCocinaService>{
-
+	
+	@Value("${configuracion.directorio.imagenes.upload}")
+	private String directorio_upload;
+	
 	@Autowired
 	private RecetaCocinaService recetaCocinaService;
 	@Autowired

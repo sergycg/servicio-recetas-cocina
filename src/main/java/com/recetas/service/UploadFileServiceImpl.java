@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
@@ -15,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class UploadFileServiceImpl implements UploadFileService {
+	
 
+	
 	private final static String DIRECTORIO_UPLOAD = "C:\\pruebaUploads";
 	private final static String DIRECTORIO_STATIC_IMAGES = "src\\main\\resources\\static\\images";
 	private final static String DEFAULT_IMAGE = "camara-de-fotos.png";
