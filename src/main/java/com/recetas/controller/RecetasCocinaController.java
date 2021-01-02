@@ -29,7 +29,7 @@ import com.recetas.entity.Receta;
 import com.recetas.service.RecetaCocinaService;
 import com.recetas.service.UploadFileService;
 
-@CrossOrigin(origins = { "*" })
+//@CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/recetas")
 public class RecetasCocinaController extends CommonController<Receta, RecetaCocinaService>{

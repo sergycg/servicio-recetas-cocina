@@ -17,7 +17,7 @@ import com.recetas.common.controller.CommonController;
 import com.recetas.entity.Ingrediente;
 import com.recetas.service.IngredienteService;
 
-@CrossOrigin(origins = { "*" })
+//@CrossOrigin(origins = { "*" })
 @RestController
 @RequestMapping("/ingredientes")
 public class IngredientesController extends CommonController<Ingrediente, IngredienteService>{
