@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -15,13 +16,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
+@Qualifier("UploadFile")
 public class UploadFileServiceImpl implements UploadFileService {
 	
 
 	@Value("${configuracion.directorio.imagenes.upload}")
 	private String directorioUpload;
 	
-//	private final static String DIRECTORIO_UPLOAD = "C:\\pruebaUploads";
 	private final static String DIRECTORIO_STATIC_IMAGES = "src\\main\\resources\\static\\images";
 	private final static String DEFAULT_IMAGE = "camara-de-fotos.png";
 
@@ -61,8 +62,7 @@ public class UploadFileServiceImpl implements UploadFileService {
 		return false;
 	}
 
-	@Override
-	public Path getPath(String nombreFoto) {
+	private Path getPath(String nombreFoto) {
 		return Paths.get(directorioUpload).resolve(nombreFoto).toAbsolutePath();
 	}
 }

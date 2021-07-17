@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.io.Resource;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.domain.Page;
@@ -14,7 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,6 +38,7 @@ public class RecetasCocinaController extends CommonController<Receta, RecetaCoci
 	@Autowired
 	private RecetaCocinaService recetaCocinaService;
 	@Autowired
+	@Qualifier("UploadFile")
 	private UploadFileService uploadFileService;
 
 	@GetMapping()
@@ -108,6 +109,7 @@ public class RecetasCocinaController extends CommonController<Receta, RecetaCoci
 		cabecera.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"");
 		
 		return new ResponseEntity<Resource>(recurso, cabecera, HttpStatus.OK);
+
 	}
 	
 	@PostMapping("/imagen/upload")
@@ -121,7 +123,7 @@ public class RecetasCocinaController extends CommonController<Receta, RecetaCoci
 			try {
 				nombreArchivo = uploadFileService.copiar(archivo);
 			} catch (IOException e) {
-				response.put("mensaje", "Error al subir la imagen del cliente");
+				response.put("mensaje", "Error al subir la imagen de la receta");
 				response.put("error", e.getMessage().concat(": ").concat(e.getCause().getMessage()));
 				return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
@@ -137,7 +139,6 @@ public class RecetasCocinaController extends CommonController<Receta, RecetaCoci
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 	}
 
-	
 	
 	
 	
