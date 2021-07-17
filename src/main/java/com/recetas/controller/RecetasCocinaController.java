@@ -41,6 +41,12 @@ public class RecetasCocinaController extends CommonController<Receta, RecetaCoci
 	@Qualifier("UploadFileS3")
 	private UploadFileService uploadFileService;
 
+	
+	@RequestMapping("/help")
+	public String help() {
+		return "Recetas Cocina Service v1.0";
+	}
+	
 	@GetMapping()
 	public ResponseEntity<?> getRecetas() {
 		List<Receta> recetas = recetaCocinaService.findAllSortByAsc("nombre");
