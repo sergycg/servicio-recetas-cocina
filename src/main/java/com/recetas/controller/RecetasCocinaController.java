@@ -38,7 +38,7 @@ public class RecetasCocinaController extends CommonController<Receta, RecetaCoci
 	@Autowired
 	private RecetaCocinaService recetaCocinaService;
 	@Autowired
-	@Qualifier("UploadFile")
+	@Qualifier("UploadFileS3")
 	private UploadFileService uploadFileService;
 
 	@GetMapping()
